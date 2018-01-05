@@ -1,11 +1,14 @@
 package org.efremov.recipe.domain;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.EqualsAndHashCode;
@@ -14,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * Represent recipe
+ * Represents recipe
  * @author efrem
  *
  */
@@ -43,7 +46,10 @@ public class Recipe {
 	@OneToOne(cascade = CascadeType.ALL)
 	private final Notes notes;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+	private final Set<Ingredient> ingredients;
+	
 	public Recipe() {
-		this(null, null, null, null, null, null, null, null, null, null);
+		this(null, null, null, null, null, null, null, null, null, null, null);
 	}
 }

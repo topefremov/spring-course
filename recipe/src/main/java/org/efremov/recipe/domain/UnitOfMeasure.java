@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 import lombok.EqualsAndHashCode;
@@ -12,29 +11,28 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Represents Unit of Measure
+ * @author aaefr
+ *
+ */
 @RequiredArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity
-/**
- * 
- * @author aaefr
- *
- */
-public class Notes {
+public class UnitOfMeasure {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private final Long id;
 	
+	private final String uom;
+	
 	@OneToOne
-	private final Recipe recipe;
+	private Ingredient ingredient;
 	
-	@Lob
-	private final String recipeNotes;
-	
-	Notes() {
-		this(null, null, null);
+	public UnitOfMeasure() {
+		this(null, null);
 	}
 }

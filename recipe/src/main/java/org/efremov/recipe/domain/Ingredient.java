@@ -1,10 +1,13 @@
 package org.efremov.recipe.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.EqualsAndHashCode;
@@ -17,24 +20,22 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-/**
- * 
- * @author aaefr
- *
- */
-public class Notes {
+public class Ingredient {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private final Long id;
 	
-	@OneToOne
+	private final String description;
+	private final BigDecimal amount;
+
+	@ManyToOne
 	private final Recipe recipe;
 	
-	@Lob
-	private final String recipeNotes;
+	@OneToOne(fetch = FetchType.EAGER)
+	private final UnitOfMeasure uom;
 	
-	Notes() {
-		this(null, null, null);
+	public Ingredient() {
+		this(null, null, null, null, null);
 	}
 }
